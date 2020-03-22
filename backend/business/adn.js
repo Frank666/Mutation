@@ -1,4 +1,4 @@
-var adn = require('./adnMutant.js.js');
+var adn = require('./adnMutant.js');
 
 class CheckDna {
   constructor () {

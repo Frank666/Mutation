@@ -2,8 +2,11 @@ const router = require('express').Router();
 let validate = require('../business/adn');
 const DnaModel = require('../models/stats');
 
-router.route('/stats').get((req, res) => {    
-    res.status(200).send(DnaModel.ratio());
+router.route('/stats').get((req, res) => {        
+    DnaModel.stats(function(err, result){
+        if(err) res.status(401).send(err);        
+        res.status(200).json(result);
+    });
 });
 
 router.route('/mutation').post((req, res) => {

@@ -11,8 +11,8 @@ const dnaSchema = new schema({
 
 const Dna = mongoose.model('dnamutation', dnaSchema);
 
-function GetAll(){
-    let data = Dna.aggregate([{
+function GetAll(callback){
+    let val = Dna.aggregate([{
         $group: {
             _id: null,            
             count_no_mutations: { $sum: "$nocheck" },
@@ -21,19 +21,20 @@ function GetAll(){
         {
             $project: 
             {
-                _id:1,
+                _id:0,
+                pup: 1, 
                 count_no_mutations: 1,
                 count_mutations: 1,
                 ratio: { $round: [ { $divide: [ "$count_mutations","$count_no_mutations" ]}, 2] }
             }
         }         
-    ]).exec(function(err, res){
-        if(err)
-            console.log(err);
-        console.log(res);
-    });    
-    return data;
+    ]).exec()
+    .then( result =>{              
+        callback(null, result);
+    })
+    .catch(err => callback(err, null));        
 }
+ 
 
 function getNextVal(sequenceOfName){
     var sequenceDoc =  Dna.findByIdAndUpdate({
@@ -55,5 +56,5 @@ function getNextVal(sequenceOfName){
 module.exports = {
     model: Dna,
     nextValue: getNextVal,
-    ratio: GetAll
+    stats: GetAll
 }

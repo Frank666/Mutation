@@ -1,5 +1,5 @@
 const express = require('express');
-const adnRouter = require('../backend/routers/adn');
+const adnRouter = require('./routers/adn');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
