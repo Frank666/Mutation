@@ -30,7 +30,7 @@ http://mutation-env.eba-xqvvbtab.us-east-1.elasticbeanstalk.com/api/stats
   body (JSON)
   
   {
-	  "dna": ["ATGCGA","w","w","AGAAGG","CCCCTA","w"]
+	"dna": ["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
   }
 ### Response
 
